@@ -15,6 +15,7 @@ class App extends React.Component {
     }
     this.addGrocery = this.addGrocery.bind(this); 
     this.handleClick = this.handleClick.bind(this); 
+    this.deleteItem = this.deleteItem.bind(this); 
   };
 
 
@@ -24,7 +25,7 @@ class App extends React.Component {
       id: this.state.grocerylists[this.state.grocerylists.length -1].id + 1, 
       purchase: false}
     this.setState({ grocerylists: [...this.state.grocerylists, grocery] });
-  }
+  };
   handleClick(id) {
     this.setState({grocerylists: this.state.grocerylists.map(grocery => {
       if (grocery.id === id) {
@@ -35,12 +36,22 @@ class App extends React.Component {
     });
   };
 
+  deleteItem(name) {
+    const newList = this.state.grocerylists.filter(removeItem => {
+      return removeItem.name !== name;
+    })
+    console.log(newList);
+    this.setState({
+      grocerylists: [...newList]
+    })   
+  };
+
 
   render() {
   return (
     <div>
       <Groceryform addGrocery={this.addGrocery}/>
-      <Grocery name="Grocery list" items={this.state.grocerylists} todoClick={this.handleClick}/>
+      <Grocery name="Grocery list" items={this.state.grocerylists} todoClick={this.handleClick} toDelete={this.deleteItem}/>
     </div>
     );
   };

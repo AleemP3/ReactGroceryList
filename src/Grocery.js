@@ -6,7 +6,10 @@ const Grocery = (props) => (
       {props.name}
     </h2>
     <ul>
-      {props.items.map(item => <Grocerystyle key={item.id} {...item} todoClick={props.todoClick} />)} 
+      {props.items.map(item => <Grocerystyle key={item.id} 
+      {...item} 
+      todoClick={props.todoClick} 
+      toDelete={props.toDelete} />)} 
     </ul>
   </div>
 );
